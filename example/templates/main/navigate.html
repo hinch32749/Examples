@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigate</title>
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}" type="text/css">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script>
+    function select(link) {
+            const item = link.parentNode
+            const tabs = item.parentNode
+            const index = Array.prototype.indexOf.call(tabs.children, item)
+            const items = tabs.querySelectorAll('.tab-item')
+
+            tabs.style.setProperty('--index', index + 1)
+            items.forEach(item => item.classList.remove('active'))
+            item.classList.add('active')
+            }
+</script>
+    <div class="tab">
+        <ul class="tab-items">
+            <li class="tab-item">
+                <a class="item-link" onclick="select(this)" href="#">
+                    <i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="tab-item">
+                <a class="item-link" onclick="select(this)" href="#">About</a>
+            </li>
+            <li class="tab-item">
+                <a class="item-link" onclick="select(this)" href="#">Blog</a>
+            </li>
+            <li class="tab-item">
+                <a class="item-link" onclick="select(this)" href="#">Community</a>
+            </li>
+            <li class="tab-item">
+                <a class="item-link" onclick="select(this)" href="#">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            </li>
+            <div class="tab-indicator"></div>
+        </ul>
+    </div>
+</body>
+</html>

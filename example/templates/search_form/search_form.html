@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="{% static 'css/search_form.css' %}" type="text/css">
+</head>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    {% for rubric in rubrics %}
+    <h2><strong>{{ rubric }}</strong></h2>
+        {% for category in rubric.category_set.all %}
+            {% if category in items %}
+                <p><input o type="checkbox" checked name="category" value="{{ category.id }}">{{ category }}</p>
+            {% else %}
+                <p><input type="checkbox" name="category" value="{{ category.id }}">{{ category }}</p>
+            {% endif %}
+    {% endfor %}
+    {% endfor %}
+    <input type="Submit" value="Search">
+</form>
+<div>
+    <h2>Поиск по категориям:</h2>
+    {% for item in items %}
+    {{ item }}
+    {% endfor %}
+    <br>
+    <br>
+    <p></p>
+    {% for item in items %}
+        {% for product in item.product_set.all %}
+            <p><b>Название:</b> {{ product.title }}</p>
+            <p><b>Цена:</b> {{ product.price }}</p>
+            <p><b>Описание:</b> {{ product.content }}</p>
+    <br>
+        {% endfor %}
+    {% endfor %}
+</div>
+</body>
+</html>
